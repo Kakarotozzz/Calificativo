@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de Experiencia de Viaje Interprovincial</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Encuesta de Experiencia de Viaje Interprovincial</h1>
+
+    <!-- Formulario de calificación y recomendaciones -->
+    <form id="formEncuesta">
+
+        <div class="section-title">¿Cómo calificarías tu experiencia de viaje?</div>
+        <label>Calificación (1 a 5):</label><br>
+        <input type="radio" id="1" name="calificacion" value="1"><label for="1">1</label>
+        <input type="radio" id="2" name="calificacion" value="2"><label for="2">2</label>
+        <input type="radio" id="3" name="calificacion" value="3"><label for="3">3</label>
+        <input type="radio" id="4" name="calificacion" value="4"><label for="4">4</label>
+        <input type="radio" id="5" name="calificacion" value="5" checked><label for="5">5</label><br><br>
+
+        <div class="section-title">Recomendaciones:</div>
+        <textarea name="recomendaciones" id="recomendaciones" placeholder="Escribe tus recomendaciones o sugerencias..."></textarea><br><br>
+
+        <div class="section-title">Medidas de Seguridad para el Viaje</div>
+        <p><strong>Extintores:</strong> Es vital para controlar posibles incendios por sobrecalentamiento o cortocircuitos. Revisa regularmente la fecha y condiciones del extintor.</p>
+        <p><strong>Neumático de repuesto:</strong> Asegúrate de llevar siempre un neumático de repuesto en buen estado para poder reemplazarlo en caso de emergencia.</p>
+        <p><strong>Conos o triángulos de seguridad:</strong> Utiliza estos dispositivos para alertar a otros conductores si el vehículo está detenido en la vía.</p>
+        <p><strong>Botiquín de primeros auxilios:</strong> Lleva un botiquín para brindar atención a personas con lesiones menores mientras llega asistencia profesional.</p>
+
+        <div class="section-title">Números de Emergencia:</div>
+        <ul>
+            <li><strong>Policía Nacional del Perú:</strong> 105</li>
+            <li><strong>Bomberos:</strong> 116</li>
+            <li><strong>Emergencias de la Policía de Carreteras:</strong> 110</li>
+            <li><strong>Defensa Civil:</strong> 115</li>
+        </ul>
+
+        <div class="button-container">
+            <input type="submit" value="Enviar Encuesta">
+        </div>
+    </form>
+
+    <!-- Botón para mostrar u ocultar las respuestas guardadas -->
+    <div class="button-container">
+        <button id="verRespuestas" onclick="toggleRespuestas()">Ver todas las calificaciones y recomendaciones</button>
+    </div>
+
+    <!-- Área donde se mostrarán las respuestas guardadas -->
+    <div id="listaRespuestas" class="response-list" style="display:none;">
+        <h2>Respuestas Guardadas</h2>
+        <!-- Aquí se mostrarán las respuestas -->
+    </div>
+
+    <!-- Información adicional de contacto de los conductores (si es necesario) -->
+    <div class="emergency-contact">
+        <h2>Datos de Contacto del Conductor</h2>
+        <ul>
+            <li><strong>Nombre del Conductor:</strong> Juan Pérez</li>
+            <li><strong>Licencia de Conducir:</strong> 12345678</li>
+            <li><strong>Vehículo:</strong> Bus Interprovincial ABC</li>
+            <li><strong>Teléfono de Emergencia:</strong> 987654321</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Función para guardar los datos en localStorage y mostrarlos en la página
+    document.getElementById("formEncuesta").addEventListener("submit", function(event) {
+        event.preventDefault();  // Evitar que el formulario recargue la página
+
+        // Obtener los valores del formulario
+        let calificacion = document.querySelector('input[name="calificacion"]:checked').value;
+        let recomendaciones = document.getElementById("recomendaciones").value;
+
+        // Crear un objeto con los datos
+        let encuestaData = {
+            calificacion: calificacion,
+            recomendaciones: recomendaciones
+        };
+
+        // Obtener las respuestas previas desde localStorage
+        let respuestasGuardadas = JSON.parse(localStorage.getItem("respuestas")) || [];
+
+        // Agregar la nueva respuesta
+        respuestasGuardadas.push(encuestaData);
+
+        // Guardar todas las respuestas en localStorage
+        localStorage.setItem("respuestas", JSON.stringify(respuestasGuardadas));
+
+        // Mostrar la respuesta en la página
+        mostrarRespuestas();
+    });
+
+    // Función para mostrar las respuestas guardadas
+    function mostrarRespuestas() {
+        let respuestasGuardadas = JSON.parse(localStorage.getItem("respuestas")) || [];
+        let listaRespuestas = document.getElementById("listaRespuestas");
+
+        // Limpiar la lista antes de agregar nuevas respuestas
+        listaRespuestas.innerHTML = "<h2>Respuestas Guardadas</h2>";
+
+        if (respuestasGuardadas.length > 0) {
+            respuestasGuardadas.forEach(function(respuesta) {
+                let item = document.createElement("div");
+                item.classList.add("response-item");
+                item.innerHTML = `<h3>Calificación: ${respuesta.calificacion}</h3><p><strong>Recomendaciones:</strong> ${respuesta.recomendaciones}</p>`;
+                listaRespuestas.appendChild(item);
+            });
+        } else {
+            listaRespuestas.innerHTML += "<p>No hay respuestas guardadas.</p>";
+        }
+    }
+
+    // Mostrar las respuestas guardadas al cargar la página
+    mostrarRespuestas();
+
+    // Función para alternar la visibilidad de las respuestas
+    function toggleRespuestas() {
+        let listaRespuestas = document.getElementById("listaRespuestas");
+        let boton = document.getElementById("verRespuestas");
+
+        if (listaRespuestas.style.display === "none") {
+            listaRespuestas.style.display = "block";
+            boton.innerText = "Ocultar todas las calificaciones y recomendaciones";
+        } else {
+            listaRespuestas.style.display = "none";
+            boton.innerText = "Ver todas las calificaciones y recomendaciones";
+        }
+    }
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,120 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Títulos */
+h1 {
+    color: #333;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 22px;
+    margin-top: 20px;
+    color: #2a7fd0;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="radio"], input[type="submit"] {
+    margin-top: 10px;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+}
+
+/* Botones */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2a7fd0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1f66b4;
+}
+
+/* Lista de respuestas */
+.response-list {
+    margin-top: 30px;
+}
+
+.response-item {
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.response-item h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.response-item p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Información de emergencia */
+.emergency-contact {
+    margin-top: 30px;
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.emergency-contact h2 {
+    color: #2a7fd0;
+}
+
+.emergency-contact ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.emergency-contact li {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
